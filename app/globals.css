@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+/*
+ * Catppuccin Frappé — single source of truth for theme tokens.
+ * Dark theme only (it's a terminal). Semantic roles are mapped below.
+ */
+:root {
+  /* Base / surfaces */
+  --crust: #232634;
+  --mantle: #292c3c;
+  --base: #303446;
+  --surface0: #414559;
+  --surface1: #51576d;
+  --surface2: #626880;
+
+  /* Text */
+  --text: #c6d0f5;
+  --subtext1: #b5bfe2;
+  --subtext0: #a5adce;
+  --overlay2: #949cbb;
+  --overlay1: #838ba7;
+  --overlay0: #737994;
+
+  /* Accents */
+  --rosewater: #f2d5cf;
+  --flamingo: #eebebe;
+  --pink: #f4b8e4;
+  --mauve: #ca9ee6;
+  --red: #e78284;
+  --maroon: #ea999c;
+  --peach: #ef9f76;
+  --yellow: #e5c890;
+  --green: #a6d189;
+  --teal: #81c8be;
+  --sky: #99d1db;
+  --sapphire: #85c1dc;
+  --blue: #8caaee;
+  --lavender: #babbf1;
+
+  /* Semantic roles */
+  --accent: var(--blue); /* primary accent: links, prompt, active nav */
+  --accent-2: var(--teal); /* secondary accent */
+}
+
+/* Expose tokens to Tailwind v4 utilities (text-text, bg-base, border-surface0, …) */
+@theme inline {
+  --color-crust: var(--crust);
+  --color-mantle: var(--mantle);
+  --color-base: var(--base);
+  --color-surface0: var(--surface0);
+  --color-surface1: var(--surface1);
+  --color-surface2: var(--surface2);
+
+  --color-text: var(--text);
+  --color-subtext1: var(--subtext1);
+  --color-subtext0: var(--subtext0);
+  --color-overlay2: var(--overlay2);
+  --color-overlay1: var(--overlay1);
+  --color-overlay0: var(--overlay0);
+
+  --color-rosewater: var(--rosewater);
+  --color-flamingo: var(--flamingo);
+  --color-pink: var(--pink);
+  --color-mauve: var(--mauve);
+  --color-red: var(--red);
+  --color-maroon: var(--maroon);
+  --color-peach: var(--peach);
+  --color-yellow: var(--yellow);
+  --color-green: var(--green);
+  --color-teal: var(--teal);
+  --color-sky: var(--sky);
+  --color-sapphire: var(--sapphire);
+  --color-blue: var(--blue);
+  --color-lavender: var(--lavender);
+
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "Cascadia Code",
+    "Source Code Pro", Menlo, Consolas, monospace;
+}
+
+* {
+  border-color: var(--surface0);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* offset for fixed header on anchor jumps */
+  color-scheme: dark;
+}
+
+body {
+  background: var(--base);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum"; /* tabular numerals for stats/metrics */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Editor-style selection */
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--text);
+}
+
+/* Custom scrollbar to match the terminal aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--mantle);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface1);
+  border-radius: 0;
+  border: 2px solid var(--mantle);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--surface2);
+}
+
+/* Focus visibility for keyboard nav (a11y) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Soft accent glow for key headings */
+.text-glow {
+  text-shadow: 0 0 24px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+/* Glow ring on interactive surfaces (buttons, terminal windows) */
+.glow-accent {
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent),
+    0 0 28px -6px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.glow-hover {
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 26px -8px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Blinking terminal cursor */
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Subtle film-grain drift */
+@keyframes grain-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-5%, -10%);
+  }
+  30% {
+    transform: translate(3%, -15%);
+  }
+  50% {
+    transform: translate(12%, 9%);
+  }
+  70% {
+    transform: translate(9%, 4%);
+  }
+  90% {
+    transform: translate(-1%, 7%);
+  }
+}
+
+/* One-time CRT flicker during boot only */
+@keyframes boot-flicker {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  12% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Honor user motion preferences everywhere */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
