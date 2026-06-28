@@ -9,7 +9,7 @@ export function Skills() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {skills.map((group, i) => (
           <Reveal key={group.key} delay={i * 70}>
-            <div className="rounded-md border border-surface0 bg-crust/40 p-5">
+            <div className="glow-hover rounded-md border border-surface0 bg-crust/40 p-5 hover:border-accent/50">
               <h3 className="font-mono text-sm">
                 <span className="text-mauve">{group.key}</span>
                 <span className="text-overlay1">: [</span>

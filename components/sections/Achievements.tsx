@@ -29,7 +29,7 @@ export function Achievements() {
           <Reveal key={a.title} delay={i * 70}>
             <div
               className={cn(
-                "flex items-start gap-4 rounded-md border border-surface0 bg-crust/40 p-4 transition-colors",
+                "glow-hover flex items-start gap-4 rounded-md border border-surface0 bg-crust/40 p-4",
                 accentBorder[a.accent],
               )}
             >

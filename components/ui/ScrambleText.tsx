@@ -57,7 +57,8 @@ export function ScrambleText({
         raf.current = undefined;
         return;
       }
-      frame += 1;
+      // Advance by a fraction of a frame per tick to slow the decode down.
+      frame += 0.4;
       raf.current = requestAnimationFrame(tick);
     };
     tick();
